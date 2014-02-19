@@ -11,3 +11,16 @@ E:\Dokumenter\Visual Studio Projects\Test\Test\bin\Debug\Test.exe
 E:\Dokumenter\Visual Studio Projects\Test\Test\bin\Debug\Test.pdb
 E:\Dokumenter\Visual Studio Projects\Test\Test\obj\Debug\Test.exe
 E:\Dokumenter\Visual Studio Projects\Test\Test\obj\Debug\Test.pdb
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\bin\Debug\Test.exe.config
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\Test.exe
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\Test.pdb
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\bin\Debug\Test.exe
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\bin\Debug\Test.pdb
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\MainWindow.baml
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\MainWindow.g.cs
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\App.g.cs
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\Test_MarkupCompile.cache
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\Test.g.resources
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\Test.Properties.Resources.resources
+C:\Users\Eivind\GitProjects\Eit-Gruppe-1\Test\Test\obj\Debug\Test.csproj.GenerateResource.Cache

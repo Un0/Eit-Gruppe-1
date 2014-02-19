@@ -91,17 +91,21 @@ namespace Test
                     return;    
                 }
 
-                //SkeletonPoint p = first.Joints[JointType.Head].Position;
+                SkeletonPoint p = first.Joints[JointType.HandRight].Position;
 
-                //DepthImagePoint l = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(p, DepthImageFormat.Resolution640x480Fps30);
+                DepthImagePoint handDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(p, sensor.DepthStream.Format);
 
-                DepthImagePoint headDepthPoint = depthData.MapFromSkeletonPoint(first.Joints[JointType.Head].Position);
+                ColorImagePoint handColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, handDepthPoint, sensor.ColorStream.Format);
 
-                ColorImagePoint headColorPoint = depthData.MapToColorImagePoint(headDepthPoint.X, headDepthPoint.Y, ColorImageFormat.RgbResolution640x480Fps30);
+                //DepthImagePoint headDepthPoint = depthData.MapFromSkeletonPoint(first.Joints[JointType.Head].Position);
 
-                Canvas.SetLeft(face, headColorPoint.X - face.Width / 2);
-                Canvas.SetTop(face, headColorPoint.Y - face.Height / 2);
+                //ColorImagePoint headColorPoint = depthData.MapToColorImagePoint(headDepthPoint.X, headDepthPoint.Y, ColorImageFormat.RgbResolution640x480Fps30);
 
+                //Canvas.SetLeft(face, headColorPoint.X - face.Width / 2);
+                //Canvas.SetTop(face, headColorPoint.Y - face.Height / 2);
+
+                Canvas.SetLeft(face, handColorPoint.X - face.Width / 2);
+                Canvas.SetTop(face, handColorPoint.Y - face.Height / 2);
             }
         }
 
