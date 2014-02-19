@@ -1,0 +1,11 @@
+﻿<Window x:Class="Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="512" Width="646" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Grid>
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640">
+            <Image x:Name="vid" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640" Canvas.Top="2"/>
+            <Image x:Name="face" Height="100" Canvas.Left="343" Canvas.Top="220" Width="100" Source="http://i.imgur.com/mo2tFgc.jpg"/>
+        </Canvas>
+    </Grid>
+</Window>
