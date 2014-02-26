@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections;
 using Microsoft.Kinect;
 
 namespace Test
@@ -24,12 +25,14 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
+            init();
         }
 
         KinectSensor sensor;
 
         const int SKELETON_COUNT = 6;
         Skeleton[] allSkeletons = new Skeleton[SKELETON_COUNT];
+        List<Box> boxes = new List<Box>(); 
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -86,34 +89,73 @@ namespace Test
         }
 
         private void getCameraPoint(Skeleton first, AllFramesReadyEventArgs e) {
-            using (DepthImageFrame depthData = e.OpenDepthImageFrame()) {
-                if (depthData == null || sensor == null) {
-                    return;    
+            if (sensor == null)
+                return;
+
+            SkeletonPoint rightHand = first.Joints[JointType.HandRight].Position;
+
+            DepthImagePoint rightHandDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(rightHand, sensor.DepthStream.Format);
+            ColorImagePoint rightHandColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, rightHandDepthPoint, sensor.ColorStream.Format);
+
+            SkeletonPoint leftHand = first.Joints[JointType.HandLeft].Position;
+
+            DepthImagePoint leftHandDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(leftHand, sensor.DepthStream.Format);
+            ColorImagePoint leftHandColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, leftHandDepthPoint, sensor.ColorStream.Format);
+
+
+            double x1 = Canvas.GetLeft(face);
+            double y1 = Canvas.GetTop(face);
+            Rect box1 = new Rect(x1, y1, face.ActualWidth, face.ActualHeight);
+
+            double x2 = Canvas.GetLeft(ball1);
+            double y2 = Canvas.GetTop(ball1);
+            Rect box2 = new Rect(x2, y2, ball1.ActualWidth, ball1.ActualHeight);
+
+            boxes[0].updateHitBox(ball1); // Only for test
+
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                if (i > 0)
+                {
+                    Box boxen = boxes[i];
+                    textbox3.Text = boxes[i-1].getHitBox().ToString(); //ball1
+                    textbox1.Text = "" + boxen.getHitBox().IntersectsWith(boxes[i - 1].getHitBox());
                 }
+            }
 
-                SkeletonPoint p = first.Joints[JointType.HandRight].Position;
+            Canvas.SetLeft(face, rightHandColorPoint.X - face.Width / 2);
+            Canvas.SetTop(face, rightHandColorPoint.Y - face.Height / 2);
 
-                DepthImagePoint handDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(p, sensor.DepthStream.Format);
+            Canvas.SetLeft(ball1, leftHandColorPoint.X - face.Width / 2);
+            Canvas.SetTop(ball1, leftHandColorPoint.Y - face.Height / 2);
+        }
 
-                ColorImagePoint handColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, handDepthPoint, sensor.ColorStream.Format);
-
-                //DepthImagePoint headDepthPoint = depthData.MapFromSkeletonPoint(first.Joints[JointType.Head].Position);
-
-                //ColorImagePoint headColorPoint = depthData.MapToColorImagePoint(headDepthPoint.X, headDepthPoint.Y, ColorImageFormat.RgbResolution640x480Fps30);
-
-                //Canvas.SetLeft(face, headColorPoint.X - face.Width / 2);
-                //Canvas.SetTop(face, headColorPoint.Y - face.Height / 2);
-
-                Canvas.SetLeft(face, handColorPoint.X - face.Width / 2);
-                Canvas.SetTop(face, handColorPoint.Y - face.Height / 2);
+        private void init() {
+            textbox2.Text = "";
+            textbox3.Text = "";
+            foreach (FrameworkElement _e in canvas.Children)
+            {
+                //textbox3.Text = textbox3.Text + _e.Width.ToString() + " ";
+                String name = _e.Name;
+                if (name.Length > 4)
+                {
+                    name = name.Substring(0, 4);
+                    if (name.Equals("ball"))
+                    {
+                        textbox2.Text = textbox2.Text + _e.Name + " ";
+                        boxes.Add(new Box(_e));
+                        textbox1.Text = "" + boxes.Count;
+                        //textbox3.Text = _e.ActualWidth.ToString();
+                    }
+                }
             }
         }
 
 
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            sensor.Stop();
+            if(sensor!=null)
+                sensor.Stop();
         }
 
     }
