@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
 using Microsoft.Kinect;
+using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace Test
 {
@@ -26,6 +29,13 @@ namespace Test
         {
             InitializeComponent();
             init();
+            System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Kinectprogram\test.txt", false);
+            file.Close();
+            sw.Start();
+            klokke.Interval = 500;
+            klokke.Enabled = true;
+            klokke.Tick += new System.EventHandler(OnTimerEvent);
+            InitializeComponent();
         }
 
         KinectSensor sensor;
@@ -34,6 +44,13 @@ namespace Test
         Skeleton[] allSkeletons = new Skeleton[SKELETON_COUNT];
         List<Box> boxes = new List<Box>();
         Box boxe;
+        string lines = "";
+        Stopwatch sw = new Stopwatch();
+        Timer klokke = new Timer();
+        double maxX = 0;
+        double maxY = 0;
+        double minX = 1000000;
+        double minY = 1000000;
 
         double startX, startY;
 
@@ -95,6 +112,7 @@ namespace Test
                 return;
 
             SkeletonPoint rightHand = first.Joints[JointType.HandRight].Position;
+            SkeletonPoint r = first.Joints[JointType.Spine].Position;
 
             DepthImagePoint rightHandDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(rightHand, sensor.DepthStream.Format);
             ColorImagePoint rightHandColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, rightHandDepthPoint, sensor.ColorStream.Format);
@@ -103,6 +121,9 @@ namespace Test
 
             DepthImagePoint leftHandDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(leftHand, sensor.DepthStream.Format);
             ColorImagePoint leftHandColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, leftHandDepthPoint, sensor.ColorStream.Format);
+
+            DepthImagePoint spineDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(r, sensor.DepthStream.Format);
+            ColorImagePoint spineColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, spineDepthPoint, sensor.ColorStream.Format);
 
 
             boxe.updateHitBox(boxe1);
@@ -121,6 +142,10 @@ namespace Test
             }
 
             //textbox2.Text = "";
+            if (rightHandColorPoint.X >= 0)
+            {
+                lines = "" + (int)((rightHand.X * 100) - (r.X * 100)) + "\t" + (int)((rightHand.Y * 100) - (r.Y * 100)) + "\t" + (int)((rightHand.Z * 100) - (r.Z * 100));
+            }
             for (int i = 0; i < boxes.Count; i++)
             {
                 Box boxen = boxes[i];
@@ -171,7 +196,16 @@ namespace Test
             }
         }
 
+        private void OnTimerEvent(object sender, EventArgs e)
+        {
 
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Kinectprogram\test.txt", true))
+            {
+                if (lines.Length > 0)
+                    file.WriteLine(lines);
+            }
+
+        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(sensor!=null)
