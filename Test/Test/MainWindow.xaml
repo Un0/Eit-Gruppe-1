@@ -4,13 +4,20 @@
         Title="MainWindow" Height="512" Width="646" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640">
-            <Image x:Name="vid" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640" Canvas.Top="2" Canvas.Left="-1"/>
-            <Image x:Name="face" Height="100" Canvas.Left="470" Canvas.Top="220" Width="100" Source="http://i.imgur.com/mo2tFgc.jpg"/>
-            <Ellipse x:Name="ball1" Fill="#FF18186C" Height="100" Canvas.Left="100" Stroke="Black" Canvas.Top="220" Width="100"/>
-            <TextBox x:Name="textbox1" Height="23" Canvas.Left="40" TextWrapping="Wrap" Text="TextBox" Canvas.Top="149" Width="120"/>
-            <TextBox x:Name="textbox2" Height="23" Canvas.Left="40" TextWrapping="Wrap" Text="TextBox" Canvas.Top="177" Width="120"/>
-            <Ellipse x:Name="ball2" Fill="#FF18186C" Height="100" Canvas.Left="156" Stroke="Black" Canvas.Top="237" Width="100"/>
-            <TextBox x:Name="textbox3" Height="69" Canvas.Left="40" TextWrapping="Wrap" Text="TextBox" Canvas.Top="75" Width="120"/>
+            <Image x:Name="vid" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640" Canvas.Left="-5"/>
+            <!--<Image x:Name="face" Height="100" Canvas.Left="470" Canvas.Top="220" Width="100" Source="http://i.imgur.com/mo2tFgc.jpg"/>-->
+            <!--<Ellipse x:Name="ball1" Fill="#FF18186C" Height="50" Canvas.Left="100" Stroke="Black" Canvas.Top="270" Width="50"/>-->
+            <TextBox x:Name="textbox1" Height="23" Canvas.Left="120" TextWrapping="Wrap" Text="TextBox" Width="125"/>
+            <TextBox x:Name="textbox2" Height="23" Canvas.Left="245" TextWrapping="Wrap" Text="TextBox" Width="395"/>
+            <TextBox x:Name="textbox3" Height="69" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            <Rectangle x:Name="wall1" Fill="#FF2CD4D4" Height="50" Stroke="Black" Width="150" Canvas.Top="432"/>
+            <Rectangle x:Name="wall2" Fill="#FF2CD4D4" Height="120" Canvas.Left="150" Stroke="Black" Canvas.Top="362" Width="44"/>
+            <Rectangle x:Name="wall3" Fill="#FF2CD4D4" Height="50" Stroke="Black" Width="150" Canvas.Top="312" Canvas.Left="194"/>
+            <Rectangle x:Name="wall4" Fill="#FF2CD4D4" Height="120" Canvas.Left="344" Stroke="Black" Canvas.Top="192" Width="44"/>
+            <Rectangle x:Name="wall5" Fill="#FF2CD4D4" Height="120" Canvas.Left="493" Stroke="Black" Canvas.Top="23" Width="44"/>
+            <Rectangle x:Name="wall6" Fill="#FF2CD4D4" Height="120" Canvas.Left="493" Stroke="Black" Canvas.Top="143" Width="44"/>
+            <Rectangle x:Name="wall7" Fill="#FF2CD4D4" Height="120" Canvas.Left="493" Stroke="Black" Canvas.Top="263" Width="44"/>
+            <Rectangle x:Name="boxe1" Fill="#FFD4CC2C" Height="50" Canvas.Left="569" Stroke="Black" Canvas.Top="192" Width="50"/>
         </Canvas>
     </Grid>
 </Window>

@@ -32,8 +32,10 @@ namespace Test
 
         const int SKELETON_COUNT = 6;
         Skeleton[] allSkeletons = new Skeleton[SKELETON_COUNT];
-        List<Box> boxes = new List<Box>(); 
+        List<Box> boxes = new List<Box>();
+        Box boxe;
 
+        double startX, startY;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -103,31 +105,56 @@ namespace Test
             ColorImagePoint leftHandColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, leftHandDepthPoint, sensor.ColorStream.Format);
 
 
-            double x1 = Canvas.GetLeft(face);
-            double y1 = Canvas.GetTop(face);
-            Rect box1 = new Rect(x1, y1, face.ActualWidth, face.ActualHeight);
+            //double x1 = Canvas.GetLeft(face);
+            //double y1 = Canvas.GetTop(face);
+            //Rect box1 = new Rect(x1, y1, face.ActualWidth, face.ActualHeight);
 
-            double x2 = Canvas.GetLeft(ball1);
-            double y2 = Canvas.GetTop(ball1);
-            Rect box2 = new Rect(x2, y2, ball1.ActualWidth, ball1.ActualHeight);
+            //double x2 = Canvas.GetLeft(ball1);
+            //double y2 = Canvas.GetTop(ball1);
+            //Rect box2 = new Rect(x2, y2, ball1.ActualWidth, ball1.ActualHeight);
 
-            boxes[0].updateHitBox(ball1); // Only for test
+            //boxes[0].updateHitBox(ball1); // Only for test
 
-            for (int i = 0; i < boxes.Count; i++)
-            {
-                if (i > 0)
-                {
-                    Box boxen = boxes[i];
-                    textbox3.Text = boxes[i-1].getHitBox().ToString(); //ball1
-                    textbox1.Text = "" + boxen.getHitBox().IntersectsWith(boxes[i - 1].getHitBox());
-                }
+            boxe.updateHitBox(boxe1);
+
+            textbox3.Text = boxe.getHitBox().ToString() + "\n" + rightHandColorPoint.X + "," + rightHandColorPoint.Y;
+            //textbox1.Text = "" + boxes[0].getHitBox().IntersectsWith(ball.getHitBox()) + "  " + boxes[1].getHitBox().IntersectsWith(ball.getHitBox());
+            //textbox3.Text = textbox3.Text + "\n" + boxes[0].getHitBox() + "\n" + boxes[1].getHitBox(); //ball1
+
+            double drawPointX = startX;
+            double drawPointY = startY;
+
+            if (rightHandColorPoint.X <= Canvas.GetLeft(boxe1) + boxe1.Width && rightHandColorPoint.X >= Canvas.GetLeft(boxe1)) { 
+                drawPointX = rightHandColorPoint.X - boxe1.Width / 2;
+                drawPointY = rightHandColorPoint.Y - boxe1.Height / 2;
+                textbox1.Text = "" + drawPointX  + ","+ drawPointY;
             }
 
-            Canvas.SetLeft(face, rightHandColorPoint.X - face.Width / 2);
-            Canvas.SetTop(face, rightHandColorPoint.Y - face.Height / 2);
+            //textbox2.Text = "";
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                Box boxen = boxes[i];
+                if (boxen.getHitBox().IntersectsWith(boxe.getHitBox()))
+                {
+                    textbox2.Text = boxen.getName();
+                    drawPointX = startX;
+                    drawPointY = startY;
+                }
 
-            Canvas.SetLeft(ball1, leftHandColorPoint.X - face.Width / 2);
-            Canvas.SetTop(ball1, leftHandColorPoint.Y - face.Height / 2);
+            }
+
+            //Canvas.SetLeft(face, rightHandColorPoint.X - face.Width / 2);
+            //Canvas.SetTop(face, rightHandColorPoint.Y - face.Height / 2);
+            if (rightHandColorPoint.X <= drawPointX + boxe1.Width / 2 && rightHandColorPoint.X >= drawPointX - boxe1.Width / 2)
+            {
+                Canvas.SetLeft(boxe1, drawPointX);
+                Canvas.SetTop(boxe1, drawPointY);
+            }
+            else {
+                Canvas.SetLeft(boxe1, startX);
+                Canvas.SetTop(boxe1, startY);
+                
+            }
         }
 
         private void init() {
@@ -140,12 +167,17 @@ namespace Test
                 if (name.Length > 4)
                 {
                     name = name.Substring(0, 4);
-                    if (name.Equals("ball"))
+                    if (name.Equals("wall"))
                     {
                         textbox2.Text = textbox2.Text + _e.Name + " ";
                         boxes.Add(new Box(_e));
                         textbox1.Text = "" + boxes.Count;
                         //textbox3.Text = _e.ActualWidth.ToString();
+                    }
+                    else if (name.Equals("boxe")) {
+                        boxe = new Box(_e);
+                        startX = Canvas.GetLeft(_e);
+                        startY = Canvas.GetTop(_e);
                     }
                 }
             }

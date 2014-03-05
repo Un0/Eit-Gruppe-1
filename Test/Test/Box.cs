@@ -19,17 +19,29 @@ namespace Test
     {
         double x, y;
         Rect hitBox;
+        String name;
 
         public Box(FrameworkElement _e)
         {
             this.x = Canvas.GetLeft(_e);
             this.y = Canvas.GetTop(_e);
 
+            if (double.IsNaN(this.x))
+                this.x = 0;
+            if (double.IsNaN(this.y))
+                this.y = 0;
+
+
             this.hitBox = new Rect(x, y, _e.Width, _e.Height);
+            this.name = _e.Name;
         }
 
         public Rect getHitBox() {
             return hitBox;
+        }
+
+        public String getName() {
+            return name;
         }
 
         public void updateHitBox(FrameworkElement _e) {
