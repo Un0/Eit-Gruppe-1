@@ -1,23 +1,28 @@
 ﻿<Window x:Class="Test.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="512" Width="646" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="MainWindow" Height="990" Width="1287" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
-        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640">
-            <Image x:Name="vid" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640" Canvas.Left="-5"/>
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="1280">
+            <Image x:Name="vid" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="1280" Canvas.Left="-5"/>
             <!--<Image x:Name="face" Height="100" Canvas.Left="470" Canvas.Top="220" Width="100" Source="http://i.imgur.com/mo2tFgc.jpg"/>-->
             <!--<Ellipse x:Name="ball1" Fill="#FF18186C" Height="50" Canvas.Left="100" Stroke="Black" Canvas.Top="270" Width="50"/>-->
             <TextBox x:Name="textbox1" Height="23" Canvas.Left="120" TextWrapping="Wrap" Text="TextBox" Width="125"/>
             <TextBox x:Name="textbox2" Height="23" Canvas.Left="245" TextWrapping="Wrap" Text="TextBox" Width="395"/>
             <TextBox x:Name="textbox3" Height="69" TextWrapping="Wrap" Text="TextBox" Width="120"/>
-            <Rectangle x:Name="wall1" Fill="#FF2CD4D4" Height="50" Stroke="Black" Width="150" Canvas.Top="432"/>
-            <Rectangle x:Name="wall2" Fill="#FF2CD4D4" Height="120" Canvas.Left="150" Stroke="Black" Canvas.Top="362" Width="44"/>
-            <Rectangle x:Name="wall3" Fill="#FF2CD4D4" Height="50" Stroke="Black" Width="150" Canvas.Top="312" Canvas.Left="194"/>
-            <Rectangle x:Name="wall4" Fill="#FF2CD4D4" Height="120" Canvas.Left="344" Stroke="Black" Canvas.Top="192" Width="44"/>
-            <Rectangle x:Name="wall5" Fill="#FF2CD4D4" Height="120" Canvas.Left="493" Stroke="Black" Canvas.Top="23" Width="44"/>
-            <Rectangle x:Name="wall6" Fill="#FF2CD4D4" Height="120" Canvas.Left="493" Stroke="Black" Canvas.Top="143" Width="44"/>
-            <Rectangle x:Name="wall7" Fill="#FF2CD4D4" Height="120" Canvas.Left="493" Stroke="Black" Canvas.Top="263" Width="44"/>
-            <Rectangle x:Name="boxe1" Fill="#FFD4CC2C" Height="50" Canvas.Left="569" Stroke="Black" Canvas.Top="192" Width="50"/>
+            <Rectangle x:Name="wall1" Fill="#FFE8160C" Height="50" Stroke="Black" Width="563" Canvas.Top="734"/>
+            <Rectangle x:Name="wall2" Fill="#FFD49F2C" Height="426" Canvas.Left="319" Stroke="Black" Canvas.Top="308" Width="44"/>
+            <Rectangle x:Name="wall3" Fill="#FFD42C2C" Height="50" Stroke="Black" Width="514" Canvas.Top="490" Canvas.Left="563"/>
+            <Rectangle x:Name="wall4" Fill="#FF7E1D00" Height="100" Canvas.Left="563" Stroke="Black" Canvas.Top="390" Width="44"/>
+            <Rectangle x:Name="wall5" Fill="#FFD4782C" Height="205" Canvas.Left="1077" Stroke="Black" Canvas.Top="80" Width="44"/>
+            <Rectangle x:Name="wall6" Fill="#FF339393" Height="276" Canvas.Left="1077" Stroke="Black" Canvas.Top="285" Width="44"/>
+            <Rectangle x:Name="wall7" Fill="#FF2CD4D4" Height="173" Canvas.Left="1077" Stroke="Black" Canvas.Top="561" Width="44"/>
+            <Rectangle x:Name="wall8" Fill="#FF5AD42C" Height="50" Stroke="Black" Width="300" Canvas.Top="80" Canvas.Left="777"/>
+            <Rectangle x:Name="wall9" Fill="#FFAE2CD4" Height="50" Stroke="Black" Width="581" Canvas.Top="80" Canvas.Left="196"/>
+            <Rectangle x:Name="wall10" Fill="#FF522CD4" Height="488" Canvas.Left="152" Stroke="Black" Canvas.Top="130" Width="44"/>
+            <Rectangle x:Name="wall11" Fill="#FFD42C2C" Height="50" Stroke="Black" Width="514" Canvas.Top="258" Canvas.Left="319"/>
+            <Rectangle x:Name="boxe1" Fill="#FFD4CC2C" Height="35" Canvas.Left="1205" Stroke="Black" Canvas.Top="312" Width="35"/>
+            <Rectangle x:Name="Fake1" Fill="#FFD4782C" Height="285" Canvas.Left="1077" Stroke="Black" Width="44"/>
         </Canvas>
     </Grid>
 </Window>
