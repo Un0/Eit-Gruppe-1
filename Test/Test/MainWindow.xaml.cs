@@ -65,7 +65,7 @@ namespace Test
 
                 int stride = colorFrame.Width * 4;
 
-                vid.Source = BitmapSource.Create(colorFrame.Width, colorFrame.Height, 96, 96, PixelFormats.Bgr32, null, pixels, stride);
+                //vid.Source = BitmapSource.Create(colorFrame.Width, colorFrame.Height, 96, 96, PixelFormats.Bgr32, null, pixels, stride);
             }
 
             Skeleton first = null;
@@ -114,6 +114,8 @@ namespace Test
             double drawPointX = Canvas.GetLeft(boxe1);
             double drawPointY = Canvas.GetTop(boxe1);
 
+            
+
             if (rightHandColorPoint.X*2 <= Canvas.GetLeft(boxe1) + boxe1.Width*2 && rightHandColorPoint.X*2 >= Canvas.GetLeft(boxe1)-boxe1.Width) { 
                 drawPointX = rightHandColorPoint.X*2 - boxe1.Width / 2;
                 drawPointY = rightHandColorPoint.Y*2 - boxe1.Height / 2;
@@ -137,8 +139,12 @@ namespace Test
             //Canvas.SetTop(face, rightHandColorPoint.Y - face.Height / 2);
             //if (rightHandColorPoint.X <= drawPointX + boxe1.Width / 2 && rightHandColorPoint.X >= drawPointX - boxe1.Width / 2)
             //{
-                Canvas.SetLeft(boxe1, drawPointX);
-                Canvas.SetTop(boxe1, drawPointY);
+
+            Canvas.SetLeft(boxe1, drawPointX);
+            Canvas.SetTop(boxe1, drawPointY);
+
+            Canvas.SetLeft(handPosition, rightHandColorPoint.X*2 - handPosition.Width / 2);
+            Canvas.SetTop(handPosition, rightHandColorPoint.Y*2 - handPosition.Width / 2);
             //}
             //else
             //{
@@ -177,6 +183,5 @@ namespace Test
             if(sensor!=null)
                 sensor.Stop();
         }
-
     }
 }
