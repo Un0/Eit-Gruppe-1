@@ -66,7 +66,17 @@ namespace Test
             {
                 sensor.ColorStream.Enable();
                 sensor.DepthStream.Enable();
-                sensor.SkeletonStream.Enable();
+
+                 TransformSmoothParameters smoothingParam = new TransformSmoothParameters();
+                {
+                    smoothingParam.Smoothing = 0.7f;
+                    smoothingParam.Correction = 0.5f;
+                    smoothingParam.Prediction = 0.0f;
+                    smoothingParam.JitterRadius = 0.1f;
+                    smoothingParam.MaxDeviationRadius = 0.1f;
+                };
+
+                sensor.SkeletonStream.Enable(smoothingParam);
 
                 sensor.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>(sensor_AllFramesReady);
                 sensor.Start();
