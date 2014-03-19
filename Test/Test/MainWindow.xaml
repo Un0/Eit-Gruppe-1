@@ -7,9 +7,9 @@
             <!--<Image x:Name="vid" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="1280"/>-->
             <!--<Image x:Name="face" Height="100" Canvas.Left="470" Canvas.Top="220" Width="100" Source="http://i.imgur.com/mo2tFgc.jpg"/>-->
             <!--<Ellipse x:Name="ball1" Fill="#FF18186C" Height="50" Canvas.Left="100" Stroke="Black" Canvas.Top="270" Width="50"/>-->
-            <Rectangle x:Name="background" Fill="#7F4BD42C" Height="960" Stroke="Black" Width="1280"/>
-            <TextBox x:Name="textbox1" Height="23" Canvas.Left="120" TextWrapping="Wrap" Text="TextBox" Width="125"/>
-            <TextBox x:Name="textbox2" Height="23" Canvas.Left="245" TextWrapping="Wrap" Text="TextBox" Width="395"/>
+            <Rectangle x:Name="background" Fill="#BFF1EC73" Height="960" Stroke="Black" Width="1280"/>
+            <!--<TextBox x:Name="textbox1" Height="23" Canvas.Left="120" TextWrapping="Wrap" Text="TextBox" Width="125"/>-->
+            <TextBox x:Name="textbox2" Height="23" TextWrapping="Wrap" Text="TextBox" Width="395" Canvas.Top="936"/>
             <TextBox x:Name="textbox3" Height="69" TextWrapping="Wrap" Text="TextBox" Width="120"/>
             <Rectangle x:Name="wall1" Fill="#FF2C52D4" Height="50" Stroke="Black" Width="563" Canvas.Top="734"/>
             <Rectangle x:Name="wall2" Fill="#FF2C52D4" Height="426" Canvas.Left="319" Stroke="Black" Canvas.Top="308" Width="44"/>

@@ -70,7 +70,7 @@ namespace Test
             }
         }
 
-        void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
+        private void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
             using (ColorImageFrame colorFrame = e.OpenColorImageFrame())
             {
@@ -122,8 +122,12 @@ namespace Test
             DepthImagePoint leftHandDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(leftHand, sensor.DepthStream.Format);
             ColorImagePoint leftHandColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, leftHandDepthPoint, sensor.ColorStream.Format);
 
-            DepthImagePoint spineDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(r, sensor.DepthStream.Format);
-            ColorImagePoint spineColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, spineDepthPoint, sensor.ColorStream.Format);
+            //DepthImagePoint spineDepthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(r, sensor.DepthStream.Format);
+            //ColorImagePoint spineColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, spineDepthPoint, sensor.ColorStream.Format);
+
+            //textbox3.Text = ""+leftHandColorPoint.Y + "\n" + canvas.Height*(0.25);
+            if (leftHandColorPoint.Y <= canvas.Height*(0.2))
+                System.Windows.Application.Current.Shutdown();
 
 
             boxe.updateHitBox(boxe1);
@@ -140,7 +144,7 @@ namespace Test
             if (rightHandColorPoint.X*2 <= Canvas.GetLeft(boxe1) + boxe1.Width*2 && rightHandColorPoint.X*2 >= Canvas.GetLeft(boxe1)-boxe1.Width) { 
                 drawPointX = rightHandColorPoint.X*2 - boxe1.Width / 2;
                 drawPointY = rightHandColorPoint.Y*2 - boxe1.Height / 2;
-                textbox1.Text = "" + drawPointX  + ","+ drawPointY;
+                //textbox1.Text = "" + drawPointX  + ","+ drawPointY;
             }
 
             //textbox2.Text = "";
@@ -180,7 +184,7 @@ namespace Test
 
         private void init() {
             textbox2.Text = "";
-            textbox3.Text = "";
+            //textbox3.Text = "";
             foreach (FrameworkElement _e in canvas.Children)
             {
                 String name = _e.Name;
@@ -191,7 +195,7 @@ namespace Test
                     {
                         textbox2.Text = textbox2.Text + _e.Name + " ";
                         boxes.Add(new Box(_e));
-                        textbox1.Text = "" + boxes.Count;
+                        //textbox1.Text = "" + boxes.Count;
                     }
                     else if (name.Equals("boxe")) {
                         boxe = new Box(_e);
@@ -204,7 +208,6 @@ namespace Test
 
         private void OnTimerEvent(object sender, EventArgs e)
         {
-
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Kinectprogram\test.txt", true))
             {
                 if (lines.Length > 0)
@@ -212,6 +215,7 @@ namespace Test
             }
 
         }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(sensor!=null)
