@@ -43,6 +43,9 @@ namespace Test
         const int SKELETON_COUNT = 6;
         Skeleton[] allSkeletons = new Skeleton[SKELETON_COUNT];
         List<Box> boxes = new List<Box>();
+        List<Box> apples = new List<Box>();
+        int appleGrabCount = 0;
+        int totalApples = 0;
         Box boxe;
         string lines = "";
         Stopwatch sw = new Stopwatch();
@@ -139,9 +142,10 @@ namespace Test
             double drawPointX = Canvas.GetLeft(boxe1);
             double drawPointY = Canvas.GetTop(boxe1);
 
-            
+            appleText.Text = "Apples picked: " + appleGrabCount+ "/" + totalApples;
 
-            if (rightHandColorPoint.X*2 <= Canvas.GetLeft(boxe1) + boxe1.Width*2 && rightHandColorPoint.X*2 >= Canvas.GetLeft(boxe1)-boxe1.Width) { 
+            if ((rightHandColorPoint.X * 2 <= Canvas.GetLeft(boxe1) + boxe1.Width * 2 && rightHandColorPoint.X * 2 >= Canvas.GetLeft(boxe1) - boxe1.Width) && (rightHandColorPoint.Y * 2 <= Canvas.GetTop(boxe1) + boxe1.Height * 2 && rightHandColorPoint.Y * 2 >= Canvas.GetTop(boxe1) - boxe1.Height))
+            { 
                 drawPointX = rightHandColorPoint.X*2 - boxe1.Width / 2;
                 drawPointY = rightHandColorPoint.Y*2 - boxe1.Height / 2;
                 //textbox1.Text = "" + drawPointX  + ","+ drawPointY;
@@ -152,39 +156,45 @@ namespace Test
             {
                 lines = "" + (int)((rightHand.X * 100) - (r.X * 100)) + "\t" + (int)((rightHand.Y * 100) - (r.Y * 100)) + "\t" + (int)((rightHand.Z * 100) - (r.Z * 100));
             }
+            
             for (int i = 0; i < boxes.Count; i++)
             {
                 Box boxen = boxes[i];
                 if (boxen.getHitBox().IntersectsWith(boxe.getHitBox()))
                 {
-                    textbox2.Text = "Colision with: " + boxen.getName();
+                    //textbox2.Text = "Colision with: " + boxen.getName();
                     drawPointX = startX;
                     drawPointY = startY;
+                    showAllApples();
                 }
-
             }
 
-            //Canvas.SetLeft(face, rightHandColorPoint.X - face.Width / 2);
-            //Canvas.SetTop(face, rightHandColorPoint.Y - face.Height / 2);
-            //if (rightHandColorPoint.X <= drawPointX + boxe1.Width / 2 && rightHandColorPoint.X >= drawPointX - boxe1.Width / 2)
-            //{
+            for (int i = 0; i < apples.Count; i++) {
+                Box apple = apples[i];
+                if (apple.getActive()) {
+                    if (apple.getHitBox().IntersectsWith(boxe.getHitBox())) {
+                        appleGrabCount++;
+                        hideApple(apple);
+                    }
+                }
+            }
+
+            if (appleGrabCount == totalApples)
+                Victory.Opacity = 1;
+            else
+                Victory.Opacity = 0;
 
             Canvas.SetLeft(boxe1, drawPointX);
             Canvas.SetTop(boxe1, drawPointY);
 
             Canvas.SetLeft(handPosition, rightHandColorPoint.X*2 - handPosition.Width / 2);
             Canvas.SetTop(handPosition, rightHandColorPoint.Y*2 - handPosition.Width / 2);
-            //}
-            //else
-            //{
-            //    Canvas.SetLeft(boxe1, startX);
-            //    Canvas.SetTop(boxe1, startY);
-            //}
         }
 
         private void init() {
-            textbox2.Text = "";
+            //textbox2.Text = "";
             //textbox3.Text = "";
+            //textbox1.Text = "";
             foreach (FrameworkElement _e in canvas.Children)
             {
                 String name = _e.Name;
@@ -193,7 +203,7 @@ namespace Test
                     name = name.Substring(0, 4);
                     if (name.Equals("wall"))
                     {
-                        textbox2.Text = textbox2.Text + _e.Name + " ";
+                        //textbox2.Text = textbox2.Text + _e.Name + " ";
                         boxes.Add(new Box(_e));
                         //textbox1.Text = "" + boxes.Count;
                     }
@@ -202,8 +212,25 @@ namespace Test
                         startX = Canvas.GetLeft(_e);
                         startY = Canvas.GetTop(_e);
                     }
+                    else if (name.Equals("appl")) {
+                        apples.Add(new Box(_e));
+                        totalApples++;
+                    }
                 }
             }
+        }
+
+        private void showAllApples() {
+            foreach(Box box in apples){
+                box.setActive(true);
+                box.getFrameWorkElement().Opacity = 1.0;
+            }
+            appleGrabCount = 0;
+        }
+
+        private void hideApple(Box box) {
+            box.setActive(false);
+            box.getFrameWorkElement().Opacity = 0;
         }
 
         private void OnTimerEvent(object sender, EventArgs e)

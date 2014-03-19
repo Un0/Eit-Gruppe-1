@@ -20,6 +20,8 @@ namespace Test
         double x, y;
         Rect hitBox;
         String name;
+        bool active;
+        FrameworkElement _e;
 
         public Box(FrameworkElement _e)
         {
@@ -31,7 +33,8 @@ namespace Test
             if (double.IsNaN(this.y))
                 this.y = 0;
 
-
+            this.active = true;
+            this._e = _e;
             this.hitBox = new Rect(x, y, _e.Width, _e.Height);
             this.name = _e.Name;
         }
@@ -42,6 +45,18 @@ namespace Test
 
         public String getName() {
             return name;
+        }
+
+        public bool getActive() {
+            return active;
+        }
+
+        public void setActive(bool active) {
+            this.active = active;
+        }
+
+        public FrameworkElement getFrameWorkElement() {
+            return _e;
         }
 
         public void updateHitBox(FrameworkElement _e) {

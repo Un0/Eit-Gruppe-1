@@ -6,12 +6,8 @@
     <Grid>
         <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="1280" Grid.ColumnSpan="2" Margin="0,0,-1,0">
             <!--<Image x:Name="vid" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="1280"/>-->
-            <!--<Image x:Name="face" Height="100" Canvas.Left="470" Canvas.Top="220" Width="100" Source="http://i.imgur.com/mo2tFgc.jpg"/>-->
-            <!--<Ellipse x:Name="ball1" Fill="#FF18186C" Height="50" Canvas.Left="100" Stroke="Black" Canvas.Top="270" Width="50"/>-->
             <Rectangle x:Name="background" Fill="#BF000000" Height="960" Stroke="Black" Width="1280"/>
-            <!--<TextBox x:Name="textbox1" Height="23" Canvas.Left="120" TextWrapping="Wrap" Text="TextBox" Width="125"/>-->
-            <TextBox x:Name="textbox2" Height="23" TextWrapping="Wrap" Text="TextBox" Width="395" Canvas.Top="936"/>
-            <!--<TextBox x:Name="textbox3" Height="69" TextWrapping="Wrap" Text="TextBox" Width="120"/>-->
+
             <Rectangle x:Name="wall1" Fill="#FF2C52D4" Height="50" Stroke="Black" Width="563" Canvas.Top="734"/>
             <Rectangle x:Name="wall2" Fill="#FF2C52D4" Height="426" Canvas.Left="319" Stroke="Black" Canvas.Top="308" Width="44"/>
             <Rectangle x:Name="wall3" Fill="#FF2C52D4" Height="50" Stroke="Black" Width="514" Canvas.Top="490" Canvas.Left="563"/>
@@ -23,10 +19,31 @@
             <Rectangle x:Name="wall9" Fill="#FF2C52D4" Height="50" Stroke="Black" Width="581" Canvas.Top="80" Canvas.Left="196"/>
             <Rectangle x:Name="wall10" Fill="#FF2C52D4" Height="488" Canvas.Left="152" Stroke="Black" Canvas.Top="130" Width="44"/>
             <Rectangle x:Name="wall11" Fill="#FF2C52D4" Height="50" Stroke="Black" Width="514" Canvas.Top="258" Canvas.Left="319"/>
-            <Ellipse x:Name="handPosition" Fill="#7F31FF02" Height="25" Stroke="Black" Width="25" Canvas.Left="615" Canvas.Top="490"/>
-            <Rectangle x:Name="boxe1" Fill="#FFFFF300" Height="35" Canvas.Left="1205" Stroke="Black" Canvas.Top="312" Width="35"/>
             <Rectangle x:Name="Fake1" Fill="#FF2C52D4" Height="285" Canvas.Left="1077" Stroke="Black" Width="44"/>
+            <Rectangle x:Name="apple1" Fill="Red" Height="30" Canvas.Left="1176" Stroke="Black" Canvas.Top="820" Width="30"/>
+            <Rectangle x:Name="apple2" Fill="Red" Height="30" Canvas.Left="1008" Stroke="Black" Canvas.Top="575" Width="30"/>
+            <Rectangle x:Name="apple3" Fill="Red" Height="30" Canvas.Left="232" Stroke="Black" Canvas.Top="820" Width="30"/>
+            <Rectangle x:Name="apple4" Fill="Red" Height="30" Canvas.Left="138" Stroke="Black" Canvas.Top="80" Width="30"/>
+            <Rectangle x:Name="apple5" Fill="Red" Height="30" Canvas.Left="166" Stroke="Black" Canvas.Top="666" Width="30"/>
+            <Rectangle x:Name="apple6" Fill="Red" Height="30" Canvas.Left="903" Stroke="Black" Width="30" Canvas.Top="22"/>
+            <Rectangle x:Name="apple7" Fill="Red" Height="30" Canvas.Left="747" Stroke="Black" Canvas.Top="390" Width="30"/>
+            <Rectangle x:Name="apple8" Fill="Red" Height="30" Canvas.Left="448" Stroke="Black" Canvas.Top="614" Width="30"/>
 
+
+            <Border x:Name="Victory" BorderBrush="Black" BorderThickness="0" Height="959" Width="1280" Opacity="0">
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="184" Width="486" FontSize="128" Text="Victory" Margin="442,415,352,360"/>
+            </Border>
+
+            <Border x:Name="ApplesCount" BorderBrush="Black" BorderThickness="0" Height="86" Width="517" Opacity="1" Canvas.Top="873">
+                <TextBlock x:Name="appleText" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="86" Width="517" FontSize="60" Text="" />
+            </Border>
+
+            <!--<TextBox x:Name="textbox1" Height="47" TextWrapping="Wrap" Text="TextBox" Width="260" Canvas.Top="912" FontSize="30"/>-->
+            <!--<TextBox x:Name="textbox2" Height="39" TextWrapping="Wrap" Text="TextBox" Width="256" Canvas.Top="920" FontSize="20"/>-->
+            <!--<TextBox x:Name="textbox3" Height="69" TextWrapping="Wrap" Text="TextBox" Width="120"/>-->
+
+            <Ellipse x:Name="handPosition" Fill="#7F31FF02" Height="25" Stroke="Black" Width="24" Canvas.Left="-94" Canvas.Top="322"/>
+            <Rectangle x:Name="boxe1" Fill="#FFFFF300" Height="35" Canvas.Left="935" Stroke="Black" Canvas.Top="375" Width="35"/>
         </Canvas>
     </Grid>
 </Window>
