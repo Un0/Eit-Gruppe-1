@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 
 
-namespace Test
+namespace Programmet
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -50,11 +50,12 @@ namespace Test
         string lines = "";
         Stopwatch sw = new Stopwatch();
         Timer klokke = new Timer();
-        double maxX = 0;
-        double maxY = 0;
-        double minX = 1000000;
-        double minY = 1000000;
+        //double maxX = 0;
+        //double maxY = 0;
+        //double minX = 1000000;
+        //double minY = 1000000;
 
+        bool recordLines = true;
         double startX, startY;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -67,13 +68,13 @@ namespace Test
                 sensor.ColorStream.Enable();
                 sensor.DepthStream.Enable();
 
-                 TransformSmoothParameters smoothingParam = new TransformSmoothParameters();
+                TransformSmoothParameters smoothingParam = new TransformSmoothParameters();
                 {
-                    smoothingParam.Smoothing = 0.7f;
-                    smoothingParam.Correction = 0.5f;
+                    smoothingParam.Smoothing = 0.75f;
+                    smoothingParam.Correction = 0.1f;
                     smoothingParam.Prediction = 0.0f;
                     smoothingParam.JitterRadius = 0.1f;
-                    smoothingParam.MaxDeviationRadius = 0.1f;
+                    smoothingParam.MaxDeviationRadius = 0.08f;
                 };
 
                 sensor.SkeletonStream.Enable(smoothingParam);
@@ -95,7 +96,7 @@ namespace Test
 
                 int stride = colorFrame.Width * 4;
 
-                //vid.Source = BitmapSource.Create(colorFrame.Width, colorFrame.Height, 96, 96, PixelFormats.Bgr32, null, pixels, stride);
+                vid.Source = BitmapSource.Create(colorFrame.Width, colorFrame.Height, 96, 96, PixelFormats.Bgr32, null, pixels, stride);
             }
 
             Skeleton first = null;
@@ -139,7 +140,7 @@ namespace Test
             //ColorImagePoint spineColorPoint = this.sensor.CoordinateMapper.MapDepthPointToColorPoint(sensor.DepthStream.Format, spineDepthPoint, sensor.ColorStream.Format);
 
             //textbox3.Text = ""+leftHandColorPoint.Y + "\n" + canvas.Height*(0.25);
-            if (leftHandColorPoint.Y <= canvas.Height*(0.2))
+            if (leftHandColorPoint.Y*2 <= canvas.Height*(0.15))
                 System.Windows.Application.Current.Shutdown();
 
 
@@ -189,16 +190,20 @@ namespace Test
                 }
             }
 
-            if (appleGrabCount == totalApples)
+            if (appleGrabCount == totalApples){
                 Victory.Opacity = 1;
-            else
-                Victory.Opacity = 0;
+                recordLines = false;
+            }
+            else {
+                Canvas.SetLeft(boxe1, drawPointX);
+                Canvas.SetTop(boxe1, drawPointY);
 
-            Canvas.SetLeft(boxe1, drawPointX);
-            Canvas.SetTop(boxe1, drawPointY);
+                Canvas.SetLeft(handPosition, rightHandColorPoint.X*2 - handPosition.Width / 2);
+                Canvas.SetTop(handPosition, rightHandColorPoint.Y*2 - handPosition.Height / 2);
 
-            Canvas.SetLeft(handPosition, rightHandColorPoint.X*2 - handPosition.Width / 2);
-            Canvas.SetTop(handPosition, rightHandColorPoint.Y*2 - handPosition.Width / 2);
+                Canvas.SetLeft(handPosition2, leftHandColorPoint.X * 2 - handPosition.Width / 2);
+                Canvas.SetTop(handPosition2, leftHandColorPoint.Y * 2 - handPosition.Height / 2);
+            }
         }
 
         private void init() {
@@ -247,7 +252,7 @@ namespace Test
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Kinectprogram\test.txt", true))
             {
-                if (lines.Length > 0)
+                if (lines.Length > 0 && recordLines)
                     file.WriteLine(lines);
             }
 
